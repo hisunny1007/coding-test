@@ -1,24 +1,11 @@
 a, b, c = map(int, input().split())
+lst = [a, b, c]
+lst.sort()
 
-if a == b == c:
-  print(10000+a*1000)
-
-# 2 2 3
-# 3 3 1
-elif a == b and b != c:
-  print(1000+a*100)
-
-# 1 3 3
-# 5 2 2
-elif a != b and b == c:
-  print(1000+b*100)
-
-# 1 3 1
-# 5 2 5
-
-elif a == c and b != c:
-  print(1000+a*100)
-
-
-elif (a != b and b != c and a != c):
-  print(max(a, b, c)*100)
+if lst[0]== lst[1] == lst[2]:
+  print(10000+lst[0]*1000)
+elif lst[0] == lst[1] or lst[1] == lst[2]:
+  print(1000+lst[1]*100)
+else:
+  # print(max(lst)*100)
+  print(lst[2]*100)
