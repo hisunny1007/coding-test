@@ -1,6 +1,4 @@
-N = list(input())
+N = input()
 
-N.sort(reverse=True)
-# print(N)
-sorted_number = ''.join(N)
-print(sorted_number)
+sorted_N = ''.join(sorted(N, reverse=True))
+print(sorted_N)
