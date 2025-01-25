@@ -5,14 +5,13 @@ N, K = map(int, input().split())
 
 temps = list(map(int, input().split()))
 
-# 누적합 리스트 제작
-acc = [0]
-for temp in temps:
-    acc.append(acc[-1]+temp)
+# 초기값 설정
+cnt = sum(temps[:K])
+ans = cnt
 
-ans = -987654321
-for i in range(N-K+1):
-    tmp = acc[i+K] - acc[i]
-    ans = max(ans, tmp)
+# 슬라이딩 윈도우
+for i in range(N-K):
+    cnt += temps[i+K] - temps[i]
+    ans = max(ans, cnt)
 
 print(ans)
