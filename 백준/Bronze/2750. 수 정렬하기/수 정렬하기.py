@@ -1,9 +1,13 @@
-#2750번 수 정렬하기 https://www.acmicpc.net/problem/2750
+import sys
 
-N = int(input())
-numbers = [int(input()) for _ in range(N)] 
+input = sys.stdin.readline
+
+n = int(input())
+numbers = []
+
+for _ in range(n):
+  number = int(input())
+  numbers.append(number)
 
 numbers.sort()
-
-for number in numbers:
-  print(number)
+print(*numbers, sep="\n")
