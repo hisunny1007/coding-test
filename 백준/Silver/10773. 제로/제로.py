@@ -3,14 +3,15 @@ import sys
 input = sys.stdin.readline
 
 k = int(input())
+
 stack = []
 
 for _ in range(k):
-  number = int(input())
+  num = int(input())
 
-  if number == 0:
+  if num == 0:
     stack.pop()
   else:
-    stack.append(number)
+    stack.append(num)
 
 print(sum(stack))
