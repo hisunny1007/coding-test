@@ -1,5 +1,3 @@
-# 백준 여행가자 https://www.acmicpc.net/problem/1976
-
 import sys
 
 input = sys.stdin.readline
@@ -48,15 +46,13 @@ for i in range(n):
 plan = list(map(int, input().split()))
 
 # 첫 번째 도시 집합 확인하고 같은지 비교
-
 first_city = find(plan[0])
 
-# for city in plan:
-#   if find(city) == first_city:
-#     print("YES")
-#   else:
-#     print("NO")
+possible = True
+for city in plan:
+  if find(city) != first_city:
+    possible = False
+    break
 
-possible = all(find(city) == first_city for city in plan)
 
 print("YES" if possible else "NO")
