@@ -1,80 +1,104 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Solution {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 		
+//		File file = new File("./src/SWEA_1954_달팽이숫자/input.txt");
+//		
+//		Scanner sc = new Scanner(file);
 		Scanner sc = new Scanner(System.in);
 		
 		int t = sc.nextInt();
 		
+		// 델타값 정의 (우 -> 하 -> 좌 -> 상)
+		int[] dr = {0, 1, 0, -1}; // 상하좌우
+		int[] dc = {1, 0, -1, 0};
+		
 		for(int tc = 1; tc <= t; tc++) {
-			
 			int n = sc.nextInt();
 			
-			// n*n 빈 판 만듬 (전부 0인데 이걸 숫자로 채워야함)
 			int[][] arr = new int[n][n];
 			
-			// 우 -> 하 -> 좌 -> 상 순서대로 탐색할 것임
-			// 그러면서 1~n 숫자 채워넣기
-			
-			// 1. 델타값 정의 (우-하-좌-상)
-			int[] dr = {0, 1, 0, -1};
-			int[] dc = {1, 0, -1, 0}; 
-			
-			// 2. 시작점 정의
+			// 시작점
 			int r = 0;
 			int c = 0;
-			// 방향을 규칙적으로 바꾸는 게 아니니까 일단 변수로 만들기
-			int dir = 0; // 우측부터 갈 것임.
 			
-			// 시작점에 숫자 1 넣고 ~  숫자 n 까지 채워나갈 것임
+			// 현재 방향 (우)
+			int dir = 0;
+			
+			// 우선 시작점부터 값을 채움 (하나씩)
 			for(int num = 1; num <= n*n; num++) {
-				arr[r][c] = num; // 현재 위치에 숫자 넣음
-				// arr[0][0] = 1 집어넣음
-
-				// 다음으로 이동할 좌표 탐색하기 (dir=0이니까 우측)
-				int nr = r + dr[dir]; 
+				arr[r][c] = num;
+				
+				// 이동할 다음 지점 좌표 구하기
+				int nr = r + dr[dir];
 				int nc = c + dc[dir];
 				
-				// 다음 좌표를 확인해야돼
-				// 해당 좌표가 범위를 벗어났거나 이미 숫자가 있다면 방향 전환하고
-				// 전환된 방향으로 좌표를 다시 재설정한다
-				// 1. 범위 밖이거나
-				// 2. 다음 좌표에 이미 0이 아닌 값이 있는지
-				// => 1 or 2 => 방향전환
-				// => 범위 안이고 값이 0이라면 킵고잉
-			
-				if (nr < 0 || nr >= n || nc < 0 || nc >= n || arr[nr][nc] != 0) {
-					// 방향 전환해야돼
-					dir = (dir + 1) % 4; // 방향전환 
+				// 이동해도 되는지 확인
+				// 범위를 벗어났거나 or 0이 아닌 숫자가 있을 때
+				// => 방향 전환해야 함
+				if(nr < 0 || nr >= n || nc < 0 || nc >= n || arr[nr][nc] != 0) {
+					dir = (dir + 1) % 4; // 방향 전환
+					// 0, 1, 2, 3 이기 때문에
 					
 					// 방향전환한 새로운 좌표
 					nr = r + dr[dir];
 					nc = c + dc[dir];
 				}
 				
-				// 다음 좌표로 실제 이동함
+				// 실제 이동
+				// 시작점이 새로운 좌표값으로 바뀜
 				r = nr;
 				c = nc;
-
-//				System.out.println("다음 좌표 r은 " + r);
-//				System.out.println("다음 좌표 c은 " + c);
-
+					
 			}
-			
-			
-            // 결과 출력
-            System.out.println("#" + tc);
-            for (int i = 0; i < n; i++) {
-                for (int j = 0; j < n; j++) {
-                    System.out.print(arr[i][j] + " ");
-                }
-                System.out.println();
-            }
-            
+
+			// 값 출력하기
+			System.out.println("#" + tc);
+			for(int i = 0; i < n; i++) {
+				for(int j = 0; j < n; j++) {
+					System.out.print(arr[i][j] + " ");					
+				}
+				System.out.println();
+			}	
+					
 		} // 테케 e
 		
 		
+		
 		sc.close();
-	}
-}
+	} // main e
+
+} // 클래스 e
+
+//		n*n 배열이 있어.
+//		원래는 다 0인데 여기에 1부터 n*n까지 값을 채워나가야함!! 하 나 씩! (문제)
+//		
+//		n = 3일경우
+//		1 2 3 
+//		8 9 4
+//		7 6 5
+//		
+//		우 - 하 - 좌 - 상 방향대로 계속 움직임
+//		그럼 델타값을 이 방향대로 고정시키는 게 편할 듯
+//		
+//		그럼 언제 방향을 바꾸냐?
+//		0. 기준점 (0,0)에서 쭉 오른쪽으로 값 채워넣음
+//		1 2 3
+//		0 0 0
+//		0 0 0
+//		1. 범위를 벗어났을 때 (4는 범위 벗어났으니까) 방향 아래로 전환하기
+//		1 2 3
+//		0 0 4
+//		0 0 5
+//		2. 동일 로직 반복하다가 9 입력하려고 보니까 그 자리에 1이 있음!!
+//		=> 0이 아니면 방향 전환
+//		1 2 3
+//		8 0 4
+//		7 6 5
+//		*결론* 방향 전환
+//		1. 범위를 벗어났을 때
+//		2. 0이 아닌 값이 있을 때
