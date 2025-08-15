@@ -1,55 +1,66 @@
+
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
 public class Solution {
 	public static void main(String[] args) throws FileNotFoundException {
-//		File file = new File("./src/SWEA_1225_암호생성기/input.txt");
-//		Scanner sc = new Scanner(file);
+
 		Scanner sc = new Scanner(System.in);
 		
 		
-		for(int i = 0; i < 10; i++) {
-			Queue<Integer> q = new LinkedList<>();
-
+		for(int t = 0; t < 10; t++) {
 			int tc = sc.nextInt();
-
-			for(int j = 0; j < 8; j++) {
-				int input = sc.nextInt();
-				q.offer(input);
-			} // 큐 입력받음
+			// 배열 이용
+			int[] arr = new int[8];
 			
-//			System.out.println(q); 
+			for(int i = 0; i < 8; i++) {
+				arr[i] = sc.nextInt();
+			} // 배열 입력받음
 			
 			int subtract = 1;
 			
+			// 맨 앞에꺼를 맨 뒤로 넣기
 			while(true) {
 				
-				// 맨 앞 꺼내기
-				int num = q.poll();
-				num -= subtract; // 1~5까지 뺼 거임
+
+				// arr[0]에서 subtract 빼기
+				int first = arr[0] - subtract;
 				
-				// 0보다 작아지거나 0일 경우 0으로 뒤에 넣기
-				if(num <= 0) { // 종료 조건
-					q.offer(0); 
-					break;
+				// 나머지 왼쪽으로 밀기
+				for(int j = 0; j < 7; j++) {
+					arr[j] = arr[j+1];
 				}
 				
-				q.offer(num); // 그 뺸 값을 맨 뒤에다 넣기
-				subtract = (subtract % 5) + 1; // 2 / 3 / 4 / 5 / -> 1 / 2 ... 1 ~ 5 반복
-			}//while
 
-			// 결과 출력
-			System.out.printf("#%d ", tc);
-			for(int el : q) {
-				System.out.printf("%d ", el);
+				// 종료조건 판단
+				// 새로운 값이 뒤로 들어갈 때!! 조건 잘 확인해야 함
+//				if(arr[7] <= 0) 검사  여기서는 first가 아니라 밀린 뒤의 값을 검사하게 됨
+//				그 다음에 arr[7] = first 대입
+				// arr[7]은 왼쪽으로 밀기 후의 값이라 안됨. 새로운 first 값으로 판단해야 함
+				// 0보다 작거나 같으면 끝냄
+				if(first <= 0) {
+					arr[7] = 0;
+					break;
+				} else { // arr[0]을 맨 뒤로 옮기기
+					arr[7] = first;
+				}
+				
+				subtract = (subtract % 5) + 1;
+				
+				
+			} // while e
+			
+			System.out.print("#" + tc + " ");
+			for(int a : arr) {
+				System.out.print(a + " ");
 			}
-			System.out.println(); // 줄바꿈
+			System.out.println();
 			
 		}// 테케 e
 
 	}// 메인 e
 }// 클래스 e
-
