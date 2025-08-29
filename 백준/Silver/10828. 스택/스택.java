@@ -23,29 +23,49 @@ public class Main {
 			// push, pop, size, empty, top일 경우
 			// line의 원소가 두 개일때 조심해야 함!! 그래서 그떄 경우만 체크
 			// 문자열이니까 == 못쓰고 .equals()
-			if(order.equals("push")) {
-				int num = Integer.parseInt(line[1]);
-				stack.push(num);
-			} else if (order.equals("pop")) {
-				if (stack.isEmpty()) {
-					System.out.println(-1);
-				} else {
-					System.out.println(stack.pop());
-				}
-			} else if (order.equals("size")) {
-				System.out.println(stack.size());
-			} else if (order.equals("empty")) {
-				if (stack.isEmpty()) {
-					System.out.println(1);
-				} else {
-					System.out.println(0);
-				}
-			} else if (order.equals("top")) {
-				if (stack.isEmpty()) {
-					System.out.println(-1);
-				} else {
-					System.out.println(stack.peek());
-				}
+//			if(order.equals("push")) {
+//				int num = Integer.parseInt(line[1]);
+//				stack.push(num);
+//			} else if (order.equals("pop")) {
+//				if (stack.isEmpty()) {
+//					System.out.println(-1);
+//				} else {
+//					System.out.println(stack.pop());
+//				}
+//			} else if (order.equals("size")) {
+//				System.out.println(stack.size());
+//			} else if (order.equals("empty")) {
+//				if (stack.isEmpty()) {
+//					System.out.println(1);
+//				} else {
+//					System.out.println(0);
+//				}
+//			} else if (order.equals("top")) {
+//				if (stack.isEmpty()) {
+//					System.out.println(-1);
+//				} else {
+//					System.out.println(stack.peek());
+//				}
+//			}
+			
+			// switch-case문 이용
+			switch(order) {
+				case "push":
+					int num = Integer.parseInt(line[1]);
+					stack.push(num);
+					break;	
+				case "pop":
+			        System.out.println(stack.isEmpty() ? -1 : stack.pop());
+					break;
+				case "size":
+					System.out.println(stack.size());
+					break;
+				case "empty":
+					System.out.println(stack.isEmpty() ? 1 : 0);
+					break;
+				case "top":
+					System.out.println(stack.isEmpty() ? -1 : stack.peek());
+					break;
 			}
 		
 		}
