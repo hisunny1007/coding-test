@@ -2,62 +2,106 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class Solution {
 	public static void main(String[] args) throws FileNotFoundException {
 		
-
 		Scanner sc = new Scanner(System.in);
 		
 		int t = sc.nextInt();
-		
-//		// 파이썬 딕셔너리처럼 키밸류값으로 넣어
-		Map<String, Integer> map = new LinkedHashMap<>();
-		
-		// HashMap은 데이터 순서 보장x
-		// TreeMap은 키값을 기준으로 자동정렬 (지금은 키값이 문자열이라 원하는 게 아님..)
-		// HashMap의 순서를 보장하고 싶은 경우? -> LinkedHashMap!
-		map.put("ZRO", 0);
-		map.put("ONE", 1);
-		map.put("TWO", 2);
-		map.put("THR", 3);
-		map.put("FOR", 4);
-		map.put("FIV", 5);
-		map.put("SIX", 6);
-		map.put("SVN", 7);
-		map.put("EGT", 8);
-		map.put("NIN", 9);
-//		System.out.println(map);
-//		{FIV=5, NIN=9, SIX=6, EGT=8, ZRO=0, ONE=1, FOR=4, SVN=7, TWO=2, THR=3}
 
 		for(int tc = 1; tc <= 10; tc++) {
 			
 			String tcNum = sc.next(); // #1
 			int n = sc.nextInt(); // 7041
 			
-			// 카운팅 배열 
-			int[] arr = new int[10];
+			// 문자열 배열 만들기
+			String[] stringArr = new String[n];
+			
+			// 카운트 배열 만들기
+			int[] count = new int[10]; // 0 ~ 9
 			
 			for(int i = 0; i < n; i++) {
-				String str = sc.next();
-				arr[map.get(str)]++; // map의 키값으로 벨류값을 가져옴. 카운팅 배열 원소값 ++
-			}
-			
-//			System.out.println(map.keySet());
-//			[ZRO, ONE, TWO, THR, FOR, FIV, SIX, SVN, EGT, NIN]
+				stringArr[i] = sc.next();
 
-			StringBuilder sb = new StringBuilder();
-			
-			for(String s : map.keySet()) {
-				for(int i = 0; i < arr[map.get(s)]; i++) {
-					sb.append(s + " ");
-				}
+				switch (stringArr[i]) {
+					case "ZRO":
+						count[0]++;
+						break;
+					case "ONE":
+						count[1]++;
+						break;
+					case "TWO":
+						count[2]++;
+						break;
+
+					case "THR":
+						count[3]++;
+						break;
+
+					case "FOR":
+						count[4]++;
+						break;
+
+					case "FIV":
+						count[5]++;
+						break;
+
+					case "SIX":
+						count[6]++;
+						break;
+
+					case "SVN":
+						count[7]++;
+						break;
+
+					case "EGT":
+						count[8]++;
+						break;
+
+					case "NIN":
+						count[9]++;
+						break;
+
+				}//switch
+			}//반복문
+						
+				
+			// 출력
+			System.out.println(tcNum);
+			for(int k = 0; k < count[0]; k++) {
+				System.out.print("ZRO" + " ");
 			}
-			String result = sb.toString();
-            System.out.printf("%s %s\n", tcNum, result);
+			for(int k = 0; k < count[1]; k++) {
+				System.out.print("ONE" + " ");
+			}
+			for(int k = 0; k < count[2]; k++) {
+				System.out.print("TWO" + " ");
+			}
+			for(int k = 0; k < count[3]; k++) {
+				System.out.print("THR" + " ");
+			}
+			for(int k = 0; k < count[4]; k++) {
+				System.out.print("FOR" + " ");
+			}
+			for(int k = 0; k < count[5]; k++) {
+				System.out.print("FIV" + " ");
+			}
+			for(int k = 0; k < count[6]; k++) {
+				System.out.print("SIX" + " ");
+			}
+			for(int k = 0; k < count[7]; k++) {
+				System.out.print("SVN" + " ");
+			}
+			for(int k = 0; k < count[8]; k++) {
+				System.out.print("EGT" + " ");
+			}
+			for(int k = 0; k < count[9]; k++) {
+				System.out.print("NIN" + " ");
+			}
+							
 
 		}//tc
 		sc.close();
