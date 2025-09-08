@@ -1,17 +1,15 @@
 class Solution {
     public int solution(int n) {
-                
-        int answer = 0;
         
-        if(n <= 7) {
-            answer = 1;
-        } else {
-            answer = n / 7;
-            if(n % 7 != 0) {
-                answer++;
-            }
+        
+        // 올림을 해준다..
+        // return (int) Math.ceil((double)n/7);  
+        
+        int answer = n / 7;
+        if(n % 7 != 0) {
+            answer++;
+            
         }
-        
         return answer;
     }
 }
