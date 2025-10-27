@@ -1,3 +1,5 @@
+
+
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -35,8 +37,11 @@ public class Main {
 			double answer = (cnt / n) * 100;
 			
 			// 반올림해서 소수점 셋째 자리까지 출력
-			// %s 문자열 출력 / %n 줄바꿈
-			System.out.printf("%.3f%s%n", answer, "%");
+			// prinf에서 %% -> % 기호 출력
+			// %s 문자열 출력 / %n 줄바꿈 (\n)
+			System.out.printf("%.3f%%%n", answer);
+//			System.out.printf("%.3f%%\n", answer);
+//			System.out.printf("%.3f%s%n", answer, "%");
 		}
 		
 		sc.close();
