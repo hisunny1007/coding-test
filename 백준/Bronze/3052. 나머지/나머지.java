@@ -5,16 +5,25 @@ public class Main {
     
     Scanner sc = new Scanner(System.in);
 
-    // 서로 다른 값이 몇 개 있는지 (중복 x)
-    Set<Integer> set = new HashSet<>();
+    // 카운팅 배열
+    int[] cntArr = new int[42]; // 42로 나눴을 때 나머지는 41까지 나올 수 있음 (0~41)
 
     for(int i = 0; i < 10; i++) {
       int num = sc.nextInt();
-
-      set.add(num % 42); // 나머지 다른 것만 set에 추가
+      int idx = num % 42;
+      cntArr[idx]++;
     }
     
-    System.out.println(set.size());
+    // 배열에서 다른 원소 개수 찾기
+    // 이미 각자 나머지에 맞는 곳에서 ++ 했기 때문에 0이 아니면 다른 원소 개수
+    int cnt = 0;
+
+    for(int i = 0; i < cntArr.length; i++) {
+      if(cntArr[i] > 0) {
+        cnt++;
+      }
+    }
+    System.out.println(cnt);
     sc.close();
   }
 }
