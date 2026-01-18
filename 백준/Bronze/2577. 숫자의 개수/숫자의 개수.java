@@ -5,31 +5,31 @@ public class Main {
     
     Scanner sc = new Scanner(System.in);
 
-    int a = sc.nextInt();
-    int b = sc.nextInt();
-    int c = sc.nextInt();
-
-    int number = a * b * c;
-
-    String word = Integer.toString(number); // int -> String 변환
-    int[] answer = new int[10]; // 0 ~ 9 카운팅 배열
-
-    for(int i = 0; i < word.length(); i++) {
-      
-      char ch = word.charAt(i);
-      int num = ch - '0'; // char -> int 형 변환
-
-      // 0~9에서 비교해야 함
-      for(int j = 0; j <= 9; j++) {
-        if(num == j) {
-          answer[j]++;
-        }
-      }
+    int multiple = 1; // 곱해야 하니까 1
+    
+    for(int i = 0; i < 3; i++) {
+      int num = sc.nextInt();
+      multiple *= num;
     }
     
-    // 정답 출력
-    for(int ans : answer) {
-      System.out.println(ans);
+    // 카운팅 배열 선언
+    int[] cnt = new int[10]; // 0 ~ 9
+
+    // int -> String 변환
+    String str = Integer.toString(multiple);
+
+    // str 길이만큼 하나씩 뜯어서 카운팅배열++
+    for(int i = 0; i < str.length(); i++) {
+      char ch = str.charAt(i);
+      int idx = ch - '0'; // char -> int 변환
+
+      cnt[idx]++;
+    }
+
+    // System.out.println(Arrays.toString(cnt));
+
+    for(int c : cnt) {
+      System.out.println(c);
     }
     sc.close();
   }
