@@ -1,0 +1,10 @@
+-- 코드를 입력하세요
+# 입양 간 기록 - OUTS 있고 INS 에 기록 없는 동물
+# OUTS에는 있는데 INS에 없는 동물
+# => 겹치지 않는 애들 찾아야 함
+# => LEFT JOIN 
+SELECT O.ANIMAL_ID, O.NAME
+FROM ANIMAL_OUTS O
+LEFT JOIN ANIMAL_INS I ON O.ANIMAL_ID = I.ANIMAL_ID
+WHERE I.ANIMAL_ID IS NULL
+ORDER BY O.ANIMAL_ID
