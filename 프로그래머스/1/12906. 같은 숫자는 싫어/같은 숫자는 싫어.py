@@ -1,8 +1,8 @@
 def solution(arr):
-    answer = [arr[0]]
+    answer = []
     
-    for i in range(1, len(arr)):
-        if arr[i] != arr[i-1]:
-            answer.append(arr[i])
-            
+    for num in arr:
+        if not answer or answer[-1] != num:
+            answer.append(num)
+    
     return answer
