@@ -1,20 +1,18 @@
 def solution(participant, completion):
     
-    answer = {}
+    # 몇 번 나왔는지 세는 딕셔너리
+    counts = {}
     
-    for p in participant:
-        if p in answer:
-            answer[p] += 1
-        else:
-            answer[p] = 1
-    
-    for c in completion:
-        if c in answer:
-            answer[c] -= 1
-            
-    # return answer {"leo":1,"kiki":0,"eden":0}
-    for key, value in answer.items():
-        if value == 1:
-            return key
+    # 참가자 이름별 인원수 +1
+    for name in participant:
+        counts[name] = counts.get(name, 0) + 1
         
+    # 완주자 이름에 있으면 -1
+    for name in completion:
+        counts[name] = counts.get(name, 0) - 1
+    
+    # value값이 0이 아니면 완주 못한 사람임
+    for name in counts:
+        if counts[name] != 0:
+            return name
         
