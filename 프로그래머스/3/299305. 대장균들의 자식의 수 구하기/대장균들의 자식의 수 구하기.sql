@@ -1,0 +1,12 @@
+-- 코드를 작성해주세요
+SELECT
+    A.ID,
+    # COUNT(*)은 NULL포함
+    # COUNT(B.ID)는 NULL 세지 않으므로 자식 없으면 0
+    COUNT(B.ID) AS CHILD_COUNT
+FROM ECOLI_DATA A
+# 같은 테이블도 JOIN 가능
+LEFT JOIN ECOLI_DATA B
+    ON A.ID = B.PARENT_ID
+GROUP BY A.ID
+ORDER BY A.ID
